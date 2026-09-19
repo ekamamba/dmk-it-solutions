@@ -23,7 +23,31 @@ a { text-decoration: none; }
 
 .container { width: min(1120px, calc(100% - 24px)); margin: 0 auto; }
 .gradient-text { background: linear-gradient(90deg,#1769e0,#19b5fe); -webkit-background-clip:text; background-clip:text; color:transparent; }
-.hero-grid { background-image: linear-gradient(rgba(23,105,224,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(23,105,224,.07) 1px, transparent 1px); background-size: 42px 42px; }
+.hero-grid {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(23,105,224,.12), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(25,181,254,.10), transparent 30%),
+    radial-gradient(circle at 60% 75%, rgba(11,23,54,.06), transparent 34%),
+    linear-gradient(135deg, rgba(245,248,252,.9), rgba(255,255,255,.96));
+  position: relative;
+}
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(23,105,224,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,105,224,0.06) 1px, transparent 1px),
+    radial-gradient(circle, rgba(23,105,224,0.10) 1.2px, transparent 1.2px);
+  background-size: 26px 26px, 26px 26px, 16px 16px;
+  background-position: center center, center center, center center;
+  mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+  opacity: 0.75;
+}
+.hero-grid > * {
+  position: relative;
+  z-index: 1;
+}
 .card { border:1px solid #e4eaf2; border-radius:22px; background:white; box-shadow:0 14px 40px rgba(11,23,54,.07); }
 .btn-primary { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; background:#1769e0; color:white; font-weight:700; padding:14px 22px; transition:.2s; }
 .btn-primary:hover { transform:translateY(-2px); background:#1259c2; }

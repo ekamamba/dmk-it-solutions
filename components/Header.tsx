@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -11,7 +12,15 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
       <div className="container relative flex items-center justify-between gap-4 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0b1736] font-black text-white">DMK</div>
+          <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-white ring-1 ring-slate-200 sm:h-12 sm:w-12">
+            <Image
+              src="/images/dmk_logo.png"
+              alt="DMK IT Solutions logo"
+              fill
+              sizes="(max-width: 640px) 40px, 48px"
+              className="object-contain p-1"
+            />
+          </div>
           <div className="min-w-0">
             <div className="truncate text-sm font-black tracking-tight text-[#0b1736] sm:text-base">DMK IT SOLUTIONS</div>
             <div className="text-[9px] font-semibold uppercase tracking-[.18em] text-slate-500 sm:text-[10px]">Technology for Growth</div>
