@@ -164,5 +164,5 @@ export async function POST(request: Request) {
   const normalizedHost = host.replace(/^0\.0\.0\.0(?::\d+)?$/, "localhost");
   const origin = `${forwardedProto}://${normalizedHost}`;
 
-  return NextResponse.redirect(new URL("/website-audit/thank-you", origin));
+  return NextResponse.redirect(new URL("/website-audit/thank-you", origin), 303);
 }
