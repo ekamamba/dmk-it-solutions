@@ -34,6 +34,7 @@ export default function Header() {
           <Link href="#industries">Industries</Link>
           <Link href="#data">Data & Analytics</Link>
           <Link href="#about">About</Link>
+          <Link href="/crm">CRM</Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -55,6 +56,7 @@ export default function Header() {
             <Link href="#industries" onClick={() => setMenuOpen(false)}>Industries</Link>
             <Link href="#data" onClick={() => setMenuOpen(false)}>Data & Analytics</Link>
             <Link href="#about" onClick={() => setMenuOpen(false)}>About</Link>
+            <Link href="/crm" onClick={() => setMenuOpen(false)}>CRM</Link>
             <Link href="/website-audit" className="btn-primary mt-2 w-full justify-center" onClick={() => setMenuOpen(false)}>
               Free Website Review
             </Link>

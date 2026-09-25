@@ -49,8 +49,8 @@ a { text-decoration: none; }
   z-index: 1;
 }
 .card { border:1px solid #e4eaf2; border-radius:22px; background:white; box-shadow:0 14px 40px rgba(11,23,54,.07); }
-.btn-primary { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; background:#1769e0; color:white; font-weight:700; padding:14px 22px; transition:.2s; }
-.btn-primary:hover { transform:translateY(-2px); background:#1259c2; }
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; background:#1769e0; color:white; font-weight:700; padding:14px 22px; transition:.2s; cursor:pointer; }
+.btn-primary:hover { transform:translateY(-2px); background:#1259c2; cursor:pointer; }
 .btn-secondary { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; border:1px solid #cdd8e8; color:#0b1736; font-weight:700; padding:13px 22px; background:white; }
 .input { width:100%; border:1px solid #ccd6e5; border-radius:12px; padding:13px 14px; outline:none; }
 .input:focus { border-color:#1769e0; box-shadow:0 0 0 3px rgba(23,105,224,.12); }

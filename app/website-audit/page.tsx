@@ -16,7 +16,15 @@ export default function WebsiteAudit() {
         <form action="/api/contact" method="post" className="mt-6 space-y-4">
           <input className="input" name="name" placeholder="Your name" required />
           <input className="input" name="business" placeholder="Business name" required />
-          <input className="input" name="website" type="url" placeholder="https://yourwebsite.com" required />
+          <input
+            className="input"
+            name="website"
+            type="text"
+            placeholder="yourwebsite.com"
+            pattern="^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$"
+            title="Enter a website in the format: yourwebsite.com"
+            required
+          />
           <input className="input" name="email" type="email" placeholder="Email address" required />
           <input className="input" name="phone" placeholder="Phone (optional)" />
           <select className="input" name="businessType" defaultValue=""><option value="" disabled>Business type</option><option>Contractor / Home Services</option><option>Automotive</option><option>Beauty / Wellness</option><option>Professional Services</option><option>Restaurant / Food</option><option>Nonprofit / Church</option><option>Other</option></select>
