@@ -69,6 +69,10 @@ const buildLeadEmailHtml = ({
   </html>
 `;
 
+const logEmailEvent = (stage: string, details: Record<string, unknown>) => {
+  console.log(`[email:${stage}]`, JSON.stringify(details));
+};
+
 export async function POST(request: Request) {
   const form = await request.formData();
   const data = Object.fromEntries(form.entries()) as Record<string, string>;
@@ -110,7 +114,7 @@ export async function POST(request: Request) {
     });
 
     try {
-      await transporter.sendMail({
+      const internalMail = {
         from: `"DMK Website Form" <${smtpConfig.user}>`,
         to: smtpConfig.to,
         replyTo: email,
@@ -128,10 +132,22 @@ export async function POST(request: Request) {
           ],
           footer: "Please follow up with this lead as soon as possible.",
         }),
+      };
+
+      logEmailEvent("attempt_internal", {
+        to: smtpConfig.to,
+        replyTo: email,
+        subject: internalMail.subject,
+      });
+
+      const internalResult = await transporter.sendMail(internalMail);
+      logEmailEvent("success_internal", {
+        to: smtpConfig.to,
+        messageId: internalResult.messageId,
       });
 
       if (email && email !== "Not provided") {
-        await transporter.sendMail({
+        const userMail = {
           from: `"DMK IT Solutions" <${smtpConfig.user}>`,
           to: email,
           replyTo: smtpConfig.to,
@@ -147,12 +163,26 @@ export async function POST(request: Request) {
             ],
             footer: "If you need a faster response, you can reply directly to this email.",
           }),
+        };
+
+        logEmailEvent("attempt_user", {
+          to: email,
+          replyTo: smtpConfig.to,
+          subject: userMail.subject,
+        });
+
+        const userResult = await transporter.sendMail(userMail);
+        logEmailEvent("success_user", {
+          to: email,
+          messageId: userResult.messageId,
         });
       }
 
       console.log("Lead emails sent successfully to DMK and the user");
     } catch (error) {
-      console.error("Failed to send lead email:", error);
+      const errorDetails = error instanceof Error ? { message: error.message, stack: error.stack } : { error };
+      console.error("Failed to send lead email:", errorDetails);
+      logEmailEvent("failed", { error: errorDetails });
       return NextResponse.json({ error: "Unable to send email right now." }, { status: 500 });
     }
   } else {
